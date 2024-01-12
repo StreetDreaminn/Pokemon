@@ -186,10 +186,3 @@ def get_all_pokemon_that_start_with_o(request):
       except Exception:
             print("API call error!")
             return Response(error_response)
-
-#Ideas:
-      #Import a naruto database and work with it
-      #Understand how to copy files and table in psql
-      #Understand inspectdb django command
-      #Understand how serializers work
-      #Understand how decorators and access/refresh tokens work
