@@ -3,7 +3,10 @@ This is a project that retrieves specific information about a Pokemon using a Dj
 
 Note that this is just for development purposes and is not fit for live production.
 
-To run the API locally, make the run.sh file executable and then run it.
+To run the API locally:
+- Create a virtual environment
+- make the run.sh file executable
+- Run 'run.sh' file
 
 ### Pokemon API Requests ###
 ##### api/token #####
