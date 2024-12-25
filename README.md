@@ -3,6 +3,8 @@ This is a project that retrieves specific information about a Pokemon using a Dj
 
 Note that this is just for development purposes and is not fit for live production.
 
+To run the API locally, make the run.sh file executable and then run it.
+
 ### Pokemon API Requests ###
 ##### api/token #####
 This is to generate a token provided by OAuth 2.0 that the user can use to make the following API calls.
