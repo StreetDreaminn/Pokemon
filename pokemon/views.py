@@ -11,9 +11,9 @@ error_response = {"API call": "Failed"}
 def pokemon(request):
     try:
         if request.method == 'GET':
-                    pokemon = Pokemon.objects.raw("SELECT * FROM pokemon ORDER BY \"Pokedex No.\"")
-                    serializer = PokemonSerializers(pokemon, many=True)
-                    return Response(serializer.data)
+            pokemon = Pokemon.objects.raw("SELECT * FROM pokemon ORDER BY pokedex_no")
+            serializer = PokemonSerializers(pokemon, many=True)
+            return Response(serializer.data)
     except Exception:
         print("API call error!")
         return Response(error_response)
@@ -23,7 +23,7 @@ def get_fairy_pokemon(request):
       try:
             if request.method == 'GET':
                   with connection.cursor() as cursor:
-                        cursor.execute("SELECT * FROM pokemon WHERE \"Type 1\" = 'Fairy' OR \"Type 2\" = 'Fairy'")
+                        cursor.execute("SELECT * FROM pokemon WHERE type_1 = 'Fairy' OR type_2 = 'Fairy'")
                         all_fairy_pokemon = cursor.fetchall()
                   list_of_fairy_pokemon = []
                   for pokemon in all_fairy_pokemon:
@@ -58,8 +58,8 @@ def get_legendary_pokemon(request):
       try:
             if request.method == 'GET':
                   with connection.cursor() as cursor:
-                        cursor.execute("SELECT * FROM pokemon WHERE \"Legendary\" = 'True' \
-                                       AND \"Name\" NOT LIKE '%Mega%'")
+                        cursor.execute("SELECT * FROM pokemon WHERE legendary = 'True' \
+                                       AND name NOT LIKE '%Mega%'")
                         all_legendary_pokemon = cursor.fetchall()
                   list_of_legendary_pokemon = []
                   for pokemon in all_legendary_pokemon:
@@ -77,9 +77,9 @@ def get_top_ten_fastest_pokemon(request):
       try:
             if request.method == 'GET':
                   with connection.cursor() as cursor:
-                        cursor.execute("SELECT \"Pokedex No.\", \"Name\", \"Type 1\", \"Type 2\", \
-                                       \"Speed\", \"Generation\" FROM pokemon WHERE \"Legendary\" = 'False' \
-                                       AND \"Name\" NOT LIKE '%Mega%' ORDER BY \"Speed\" DESC LIMIT 10")
+                        cursor.execute("SELECT pokedex_no, name, type_1, type_2, \
+                                       speed, generation FROM pokemon WHERE legendary = 'False' \
+                                       AND name NOT LIKE '%Mega%' ORDER BY speed DESC LIMIT 10")
                         fast_pokemon = cursor.fetchall()
                   list_of_fast_pokemon = []
                   for pokemon in fast_pokemon:
@@ -97,8 +97,8 @@ def get_top_five_weakest_pokemon(request):
       try:
             if request.method == 'GET':
                   with connection.cursor() as cursor:
-                        cursor.execute("SELECT \"Pokedex No.\", \"Name\", \"Total\" FROM pokemon \
-                                       ORDER BY \"Total\" LIMIT 5")
+                        cursor.execute("SELECT pokedex_no, name, total FROM pokemon \
+                                       ORDER BY total LIMIT 5")
                         weak_pokemon = cursor.fetchall()
                   list_of_weak_pokemon = []
                   for pokemon in weak_pokemon:
@@ -116,8 +116,8 @@ def get_top_three_physical_attacking_pokemon(request):
       try:
             if request.method == 'GET':
                   with connection.cursor() as cursor:
-                        cursor.execute("SELECT * FROM pokemon WHERE \"Legendary\" = 'False' AND \
-                                       \"Name\" NOT LIKE '%Mega%' ORDER BY \"Attack\" DESC LIMIT 3")
+                        cursor.execute("SELECT * FROM pokemon WHERE legendary = 'False' AND \
+                                       name NOT LIKE '%Mega%' ORDER BY attack DESC LIMIT 3")
                         strong_pokemon = cursor.fetchall()
                   list_of_strong_pokemon = []
                   for pokemon in strong_pokemon:
@@ -135,9 +135,9 @@ def get_generation_three_pokemon(request):
       try:
             if request.method == 'GET':
                   with connection.cursor() as cursor:
-                        cursor.execute("SELECT \"Pokedex No.\", \"Name\", \"Type 1\", \"Type 2\", \"Generation\", \
-                                       \"Legendary\" FROM pokemon WHERE \"Generation\" = '3' AND \
-                                        \"Name\" NOT LIKE '%Mega%' AND \"Name\" NOT LIKE '%Primal%'")
+                        cursor.execute("SELECT pokedex_no, name, type_1, type_2, generation, \
+                                       legendary FROM pokemon WHERE generation = '3' AND \
+                                        name NOT LIKE '%Mega%' AND name NOT LIKE '%Primal%'")
                         generation_three = cursor.fetchall()
                   list_of_generation_three = []
                   for pokemon in generation_three:
@@ -155,8 +155,8 @@ def get_all_mega_pokemon(request):
       try:
             if request.method == 'GET':
                   with connection.cursor() as cursor:
-                        cursor.execute("SELECT \"Pokedex No.\", \"Name\", \"Generation\", \"Legendary\" \
-                                       FROM pokemon WHERE \"Name\" LIKE '%Mega%' AND \"Name\" != 'Meganium'")
+                        cursor.execute("SELECT pokedex_no, name, generation, legendary \
+                                       FROM pokemon WHERE name LIKE '%Mega%' AND name != 'Meganium'")
                         mega_pokemon = cursor.fetchall()
                   list_of_mega_pokemon = []
                   for pokemon in mega_pokemon:
@@ -174,7 +174,7 @@ def get_all_pokemon_that_start_with_o(request):
       try:
             if request.method == 'GET':
                   with connection.cursor() as cursor:
-                        cursor.execute("SELECT \"Name\" FROM pokemon WHERE \"Name\" LIKE 'O%'")
+                        cursor.execute("SELECT name FROM pokemon WHERE name LIKE 'O%'")
                         o_pokemon = cursor.fetchall()
                   list_of_pokemon_that_start_with_o = []
                   for pokemon in o_pokemon:
