@@ -4,10 +4,12 @@ from pokemon.serializers import PokemonSerializers, PostPokemonSerializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from pokemon.decorators import has_permission
 
 error_response = {"API call": "Failed"}
 
 @api_view(['GET'])
+@has_permission('pokemon')
 def pokemon(request):
     try:
         if request.method == 'GET':
@@ -19,6 +21,7 @@ def pokemon(request):
         return Response(error_response)
     
 @api_view(['GET'])
+@has_permission('fairy_pokemon')
 def get_fairy_pokemon(request):
       try:
             if request.method == 'GET':
@@ -37,6 +40,7 @@ def get_fairy_pokemon(request):
             return Response(error_response)
 
 @api_view(['GET', 'POST'])
+@has_permission('add_pokemon')
 def add_pokemon(request):
     if request.method == 'GET':
         pokemon = Pokemon.objects.all()
@@ -54,6 +58,7 @@ def add_pokemon(request):
          return Response(error_response)
 
 @api_view(['GET'])
+@has_permission('legendary_pokemon')
 def get_legendary_pokemon(request):
       try:
             if request.method == 'GET':
@@ -73,6 +78,7 @@ def get_legendary_pokemon(request):
             return Response(error_response)
 
 @api_view(['GET'])
+@has_permission('fast_pokemon')
 def get_top_ten_fastest_pokemon(request):
       try:
             if request.method == 'GET':
@@ -93,6 +99,7 @@ def get_top_ten_fastest_pokemon(request):
             return Response(error_response)
 
 @api_view(['GET'])
+@has_permission('weak_pokemon')
 def get_top_five_weakest_pokemon(request):
       try:
             if request.method == 'GET':
@@ -112,6 +119,7 @@ def get_top_five_weakest_pokemon(request):
             return Response(error_response)
 
 @api_view(['GET'])
+@has_permission('attack_pokemon')
 def get_top_three_physical_attacking_pokemon(request):
       try:
             if request.method == 'GET':
@@ -131,6 +139,7 @@ def get_top_three_physical_attacking_pokemon(request):
             return Response(error_response)
 
 @api_view(['GET'])
+@has_permission('gen_3_pokemon')
 def get_generation_three_pokemon(request):
       try:
             if request.method == 'GET':
@@ -151,6 +160,7 @@ def get_generation_three_pokemon(request):
             return Response(error_response)
 
 @api_view(['GET'])
+@has_permission('mega_pokemon')
 def get_all_mega_pokemon(request):
       try:
             if request.method == 'GET':
@@ -170,6 +180,7 @@ def get_all_mega_pokemon(request):
             return Response(error_response)
 
 @api_view(['GET'])
+@has_permission('o_pokemon')
 def get_all_pokemon_that_start_with_o(request):
       try:
             if request.method == 'GET':
