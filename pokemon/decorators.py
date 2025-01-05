@@ -1,5 +1,5 @@
 from django.http import HttpResponseForbidden
-from .models import *
+from .models import User, UserRole
 
 def get_user_role(user):
     user_role= UserRole.objects.get(user=User.objects.get(username=user))
