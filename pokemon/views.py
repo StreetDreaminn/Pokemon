@@ -1,15 +1,18 @@
 from pokemon.models import Pokemon
 from django.db import connection
 from pokemon.serializers import PokemonSerializers, PostPokemonSerializers
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.response import Response
 from rest_framework import status
 from pokemon.decorators import has_permission
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+
 
 error_response = {"API call": "Failed"}
 
 @api_view(['GET'])
 @has_permission('pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def pokemon(request):
     try:
         if request.method == 'GET':
@@ -22,6 +25,7 @@ def pokemon(request):
     
 @api_view(['GET'])
 @has_permission('fairy_pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def get_fairy_pokemon(request):
       try:
             if request.method == 'GET':
@@ -41,6 +45,7 @@ def get_fairy_pokemon(request):
 
 @api_view(['GET', 'POST'])
 @has_permission('add_pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def add_pokemon(request):
     if request.method == 'GET':
         pokemon = Pokemon.objects.all()
@@ -59,6 +64,7 @@ def add_pokemon(request):
 
 @api_view(['GET'])
 @has_permission('legendary_pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def get_legendary_pokemon(request):
       try:
             if request.method == 'GET':
@@ -79,6 +85,7 @@ def get_legendary_pokemon(request):
 
 @api_view(['GET'])
 @has_permission('fast_pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def get_top_ten_fastest_pokemon(request):
       try:
             if request.method == 'GET':
@@ -100,6 +107,7 @@ def get_top_ten_fastest_pokemon(request):
 
 @api_view(['GET'])
 @has_permission('weak_pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def get_top_five_weakest_pokemon(request):
       try:
             if request.method == 'GET':
@@ -120,6 +128,7 @@ def get_top_five_weakest_pokemon(request):
 
 @api_view(['GET'])
 @has_permission('attack_pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def get_top_three_physical_attacking_pokemon(request):
       try:
             if request.method == 'GET':
@@ -140,6 +149,7 @@ def get_top_three_physical_attacking_pokemon(request):
 
 @api_view(['GET'])
 @has_permission('gen_3_pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def get_generation_three_pokemon(request):
       try:
             if request.method == 'GET':
@@ -161,6 +171,7 @@ def get_generation_three_pokemon(request):
 
 @api_view(['GET'])
 @has_permission('mega_pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def get_all_mega_pokemon(request):
       try:
             if request.method == 'GET':
@@ -181,6 +192,7 @@ def get_all_mega_pokemon(request):
 
 @api_view(['GET'])
 @has_permission('o_pokemon')
+@throttle_classes([UserRateThrottle, AnonRateThrottle])
 def get_all_pokemon_that_start_with_o(request):
       try:
             if request.method == 'GET':
