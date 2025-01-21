@@ -1,13 +1,16 @@
 # README #
-This is a project that retrieves specific information about a Pokemon using a Django RESTFUL API system.
+## Pokemon ##
+
+This is a project that retrieves specific information about a Pokemon using a Django RESTFUL API system. This project was created to take advantage of the benefits of sending data via RESTFul architecture. The advantages of doing this is that it is more scalable, flexible, portable, statelessness, re-usable and cost effective.
 
 Note that this is just for development purposes and is not fit for live production.
-
+### How to install ###
 To run the API locally:
 - Create a virtual environment
 - make the run.sh file executable
 - Run 'run.sh' file
 
+### How it works ###
 ### Pokemon API Requests ###
 ##### api/token #####
 This is to generate a token provided by OAuth 2.0 that the user can use to make the following API calls.
