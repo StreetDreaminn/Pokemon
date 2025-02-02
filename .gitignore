@@ -1,2 +1,3 @@
 pokemon/__pycache__/*
 pokemon/migrations/*
+pokemon/tests/__pycache__/*
