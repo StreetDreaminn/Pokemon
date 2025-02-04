@@ -28,3 +28,50 @@ class TestViews(TestCase):
         self.client.force_authenticate(user=self.user)
         response = self.client.get(reverse('pokemon'))
         self.assertEqual(response.status_code, 200)
+
+    def test_fairy_pokemon_GET(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('fairy'))
+        self.assertEqual(response.status_code, 200)
+
+    @patch('pokemon.models.Pokemon.objects.all')
+    def test_add_pokemon_GET(self, mock_object):
+        mock_object.return_value = None
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('add_pokemon'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_legendary_pokemon_GET(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('legendary_pokemon'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_fast_pokemon_GET(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('fast_pokemon'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_weak_pokemon_GET(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('weak_pokemon'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_attack_pokemon_GET(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('strong_pokemon'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_gen_3_pokemon_GET(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('gen_3_pokemon'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_mega_pokemon_GET(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('mega_pokemon'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_o_pokemon_GET(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(reverse('o_pokemon'))
+        self.assertEqual(response.status_code, 200)
